@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question-Answering Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+        }
+
+        .search-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 25px; /* Adjust border radius as needed */
+            padding: 10px;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input[type="text"] {
+            flex-grow: 1;
+            background-color: transparent; /* Make the input background transparent */
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            outline: none;
+        }
+
+        .search-button-container {
+            position: relative;
+        }
+
+        .search-box button {
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 25px; /* Match the border radius of the search box */
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #357ae8;
+        }
+
+        .search-box button:active {
+            background-color: #0c55c3; /* Change the color when clicked */
+        }
+
+        /* Add animation for search box on hover */
+        .search-box:hover {
+            transform: scale(1.05); /* Adjust the scale factor for the desired animation */
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            text-align: justify;
+        }
+        /* Create the animated background container */
+        .animated-background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Create the animated background */
+        .animated-background {
+            background: linear-gradient(45deg, #E0E0E0, #A0A0A0, #E0E0E0, #A0A0A0);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Animation keyframes */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Bubbles */
+        .bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 20px; /* Adjust bubble width */
+            height: 20px; /* Adjust bubble height */
+            animation: float 10s infinite linear;
+        }
+        /* Bubble animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-40px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Style the search box with rounded corners */
+        .search-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 25px; /* Adjust border radius as needed */
+            padding: 10px;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input[type="text"] {
+            flex-grow: 1;
+            background-color: transparent; /* Make the input background transparent */
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 25px; /* Match the border radius of the search box */
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #00e5ff;
+            color: #100f0f;
+        }
+
+        /* Add animation for search box on hover */
+        .search-box:hover {
+            transform: scale(1.05); /* Adjust the scale factor for the desired animation */
+        }
+        /* Add shadow to the h1 element */
+        h1 {
+            font-size: 36px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+            text-align: center;
+        }
+        /* Style the content box */
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 25px; /* Adjust border radius as needed */
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background container -->
+    <div class="animated-background-container">
+        <div class="animated-background"></div>
+    </div>
+
+    <div class="container">
+        <h1>Question-Answering Search</h1>
+        <form method="post" class="search-box">
+            <input type="text" name="question" id="question" placeholder="Ask a question..." required>
+            <div class="search-button-container">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+        {% if question %}
+            <div class="content-box">
+                <h2>Your Question:</h2>
+                <p>{{ question }}</p>
+                <h2>Answer:</h2>
+                <p>{{ answer }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <script>
+        // Create bubbles dynamically
+        const container = document.querySelector('.animated-background-container');
+        for (let i = 0; i < 20; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.top = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${Math.random() * 6 + 4}s`;
+            container.appendChild(bubble);
+        }
+    </script>
+</body>
+</html>
