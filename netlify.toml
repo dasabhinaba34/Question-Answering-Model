@@ -1,3 +1,0 @@
-command = "python app.py"
-publish = "static" 
-PYTHON_VERSION = "3.9.12"
