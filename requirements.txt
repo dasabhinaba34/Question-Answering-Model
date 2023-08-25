@@ -29,5 +29,5 @@ tqdm==4.66.1
 transformers==4.30.2
 typing_extensions==4.7.1
 urllib3==2.0.4
-Werkzeug==2.3.7
+Werkzeug==2.2.3
 zipp==3.16.2
