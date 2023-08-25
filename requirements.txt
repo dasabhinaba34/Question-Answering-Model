@@ -9,7 +9,7 @@ fsspec==2023.1.0
 gunicorn==21.2.0
 huggingface-hub==0.16.4
 idna==3.4
-importlib-metadata==6.8.0
+importlib-metadata==6.7.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.3
